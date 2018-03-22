@@ -54,16 +54,41 @@ public void draw ()
 }
 public boolean isWon()
 {
-    //your code here
-    return false;
+     for(int r = 0; r < NUM_ROWS; r++)
+    {
+        for(int c = 0; r < NUM_COLS; r++)
+        {
+            if(!buttons[r][c].isMarked() && !buttons[r][c].isClicked())   
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 public void displayLosingMessage()
 {
-    //your code here
+    String message = "You Lose";
+    for(int r = 0; r < NUM_ROWS; r++)
+    {
+        for(int c = 0; r < NUM_COLS; r++)
+            if(bombs.contains(buttons[r][c]))
+            {
+                //buttons[r][c].setLabel("B");
+            }
+    }
+    for(int i = 0; i < message.length(); i++)
+    {
+        buttons[10][i+6].setLabel(message.substring(i,i+1));
+    }
 }
 public void displayWinningMessage()
 {
-    //your code here
+    String message = "You Win";
+     for(int i = 0; i < message.length(); i++)
+    {
+        buttons[10][i+6].setLabel(message.substring(i,i+1));
+    }
 }
 
 public class MSButton
@@ -85,9 +110,6 @@ public class MSButton
         marked = clicked = false;
         Interactive.add( this ); // register it with the manager
 
-
-
-        
     }
     public boolean isMarked()
     {
@@ -109,9 +131,11 @@ public class MSButton
 
         else if (bombs.contains(this))
             displayLosingMessage();
+
         else if (countBombs(r,c) > 0)
             label = " " + countBombs(r,c);
-        else 
+
+        else {
             if(isValid(r,c-1) && !buttons[r][c-1].isClicked())
                 buttons[r][c-1].mousePressed();
 
@@ -135,6 +159,8 @@ public class MSButton
 
              if(isValid(r+1,c-1) && !buttons[r+1][c-1].isClicked())
                 buttons[r+1][c-1].mousePressed();
+        }
+    
 
     }
 
