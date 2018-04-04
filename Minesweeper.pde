@@ -41,7 +41,7 @@ public void setBombs()
         {
             //add[r][c] to bombs
             bombs.add(buttons[r][c]);
-            System.out.println(r + ", " + c);
+            //System.out.println(r + ", " + c);
         }
     }
 }
